@@ -1,6 +1,6 @@
 set search_path to mimiciii;
 
--- step 1. Find adults between ages 16 and 89.
+-- step 1. Find adults between ages 15 and 89.
 -- step 2. Create chartevents table with only adults.
 -- step 3. Update table to include patients from icu. This includes MICU, SICU, CCU, CSRU.
 -- step 4. Query chartevents_adults for patients that have expierenced a hypotensive episode. 
@@ -12,7 +12,7 @@ set search_path to mimiciii;
 -- step 10. Get mean MAP and total urine output for 4 hours previous to onset of HE.
 -- step 11. Obtain Age, gender, los, and service type (ICU).
 
-/* Remove patients younger than 16. */
+/* Remove patients younger than 15. */
 WITH first_admission_time AS (
 SELECT 
     p.subject_id, p.dob, p.gender, 
