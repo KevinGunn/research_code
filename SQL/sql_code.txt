@@ -1,0 +1,1 @@
+This folder contains all SQL code for hypotensive cohort extraction
