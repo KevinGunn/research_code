@@ -102,8 +102,7 @@ hlscv.ks <- function(Yt.in , x.in , x.impute , const_in, prop_score){
     #Add to data set to perform regression on residuals
     offLM = cbind(y.test , mx.hat , x.test , 
                   rep(fold , length(y.test)) )
-    #print(head(x.test))
-    #print(head(offLM))
+   
     colnames(offLM) <- c("yt.test" , "mx_k.hat","int","X1","X2","fold")
     
     fold_dfs = rbind(fold_dfs , offLM)
@@ -118,7 +117,6 @@ hlscv.ks <- function(Yt.in , x.in , x.impute , const_in, prop_score){
   
   beta.off = offlm.model$coefficients
   
-  #mu_hat = return_df$mx_k.hat + beta.off%*%t(return_df[c("int","X1","X2")])
   mu_hat = as.vector(rowMeans(imp_mat) + beta.off%*%t(x.impute))
   mu_all = list(mu_hat,beta.off)
   return(mu_all)
@@ -134,9 +132,7 @@ double_cv.ks1 <- function(Yt.in , x.in , const_in, prop_score){
   num.folds=5
   
   fold_dfs = data.frame()
-  #imp_mat = matrix(0, ncol=num.folds , nrow = m)
-  #beta.off = rep(0,num.folds)
-  
+ 
   case.folds <- rep(1:num.folds,length.out=n)
   case.folds <- sample(case.folds)
   
@@ -169,7 +165,7 @@ double_cv.ks1 <- function(Yt.in , x.in , const_in, prop_score){
   for (k in 1:num.folds){
     # folds when k != k'
     fold_df = subset( return_df , fold!=k, select = -fold )
-    #print(fold_df)
+    
     fold_lm.model = lm(fold_df$yt.test ~ X1 + X2 , data = fold_df , offset = mx_k.hat,
                        weights = prop_k^-1)
     beta.off = fold_lm.model$coefficients
@@ -191,8 +187,6 @@ double_cv.ks0 <- function(Yt.in , x.in , const_in, prop_score){
   num.folds=5
   
   fold_dfs = data.frame()
-  #imp_mat = matrix(0, ncol=num.folds , nrow = m)
-  #beta.off = rep(0,num.folds)
   
   case.folds <- rep(1:num.folds,length.out=n)
   case.folds <- sample(case.folds)
@@ -226,7 +220,7 @@ double_cv.ks0 <- function(Yt.in , x.in , const_in, prop_score){
   for (k in 1:num.folds){
     # folds when k != k'
     fold_df = subset( return_df , fold!=k, select = -fold )
-    #print(fold_df)
+   
     fold_lm.model = lm(fold_df$yt.test ~ X1 + X2 , data = fold_df , offset = mx_k.hat,
                        weights = prop_k^-1)
     beta.off = fold_lm.model$coefficients
