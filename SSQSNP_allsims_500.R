@@ -111,7 +111,7 @@ hlscv.ks <- function(Yt.in , x.in , x.impute , const_in, prop_score){
     
   }
   
-  #Need to change this part so it fits coefficients for the different folds.
+ 
   return_df = fold_dfs[order(as.numeric(rownames(fold_dfs))),]
   offlm.model = lm(return_df$yt.test ~ X1 + X2 , data = return_df , offset = mx_k.hat,
                    weights = prop_score^-1)
@@ -140,7 +140,7 @@ double_cv.ks1 <- function(Yt.in , x.in , const_in, prop_score){
   case.folds <- rep(1:num.folds,length.out=n)
   case.folds <- sample(case.folds)
   
-  #This for loop gets mx_k.hat. needs to be readjusted with coefficients for k !=k'.
+  #This for loop gets mx_k.hat.
   for (fold in 1:num.folds) {
     test.rows = which(case.folds==fold,arr.ind=TRUE)
     x.test = x.in[test.rows,]
@@ -197,7 +197,7 @@ double_cv.ks0 <- function(Yt.in , x.in , const_in, prop_score){
   case.folds <- rep(1:num.folds,length.out=n)
   case.folds <- sample(case.folds)
   
-  #This for loop gets mx_k.hat. needs to be readjusted with coefficients for k !=k'.
+  #This for loop gets mx_k.hat.
   for (fold in 1:num.folds) {
     test.rows = which(case.folds==fold,arr.ind=TRUE)
     x.test = x.in[test.rows,]
