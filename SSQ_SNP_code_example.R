@@ -162,7 +162,7 @@ double_cv.ks1 <- function(Yt.in , x.in , const_in, prop_score){
   for (k in 1:num.folds){
     # folds when k != k'
     fold_df = subset( return_df , fold!=k, select = -fold )
-    #print(fold_df)
+    
     fold_lm.model = lm(fold_df$yt.test ~ X1 + X2 , data = fold_df , offset = mx_k.hat,
                        weights = prop_k^-1)
     beta.off = fold_lm.model$coefficients
@@ -217,7 +217,7 @@ double_cv.ks0 <- function(Yt.in , x.in , const_in, prop_score){
   for (k in 1:num.folds){
     # folds when k != k'
     fold_df = subset( return_df , fold!=k, select = -fold )
-    #print(fold_df)
+    
     fold_lm.model = lm(fold_df$yt.test ~ X1 + X2 , data = fold_df , offset = mx_k.hat,
                        weights = prop_k^-1)
     beta.off = fold_lm.model$coefficients
