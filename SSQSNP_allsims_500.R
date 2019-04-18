@@ -84,7 +84,7 @@ hlscv.ks <- function(Yt.in , x.in , x.impute , const_in, prop_score){
   case.folds <- rep(1:num.folds,length.out=n)
   case.folds <- sample(case.folds)
   
-  #This for loop gets mx_k.hat. needs to be readjusted with coefficients for k !=k'.
+  #This for loop gets mx_k.hat. 
   for (fold in 1:num.folds) {
     test.rows = which(case.folds==fold,arr.ind=TRUE)
     x.test = x.in[test.rows,]
